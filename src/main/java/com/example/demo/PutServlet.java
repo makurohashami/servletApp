@@ -19,26 +19,33 @@ public class PutServlet extends HttpServlet {
 
         String str = request.getParameter("id");
         int id = Integer.parseInt(str);
-
         String name = request.getParameter("name");
         int amount = Integer.parseInt(request.getParameter("amount"));
         String country = request.getParameter("country");
         int cost = Integer.parseInt(request.getParameter("cost"));
 
-        Employee employee = new Employee();
-        employee.setId(id);
-        employee.setName(name);
-        employee.setAmount(amount);
-        employee.setCountry(country);
-        employee.setCost(cost);
-
-        int status = EmployeeRepository.update(employee);
-
-        if (status > 0) {
-            response.sendRedirect("viewServlet");
+        Employee employee = EmployeeRepository.getEmployeeById(id);
+        if(employee.getId()==0) {
+            out.print("Wrong ID");
         } else {
-            out.println("Sorry! unable to update record");
+            if(amount <= 0 || cost <= 0) {
+                out.println("Incorrect data! Amount and cost must be > 0!");
+            } else {
+                employee.setId(id);
+                employee.setName(name);
+                employee.setAmount(amount);
+                employee.setCountry(country);
+                employee.setCost(cost);
+
+                int status = EmployeeRepository.update(employee);
+
+                if (status > 0) {
+                    response.sendRedirect("viewServlet");
+                } else {
+                    out.println("Sorry! unable to update record");
+                }
+            }
+            out.close();
         }
-        out.close();
     }
 }

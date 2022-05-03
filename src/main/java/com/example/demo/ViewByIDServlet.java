@@ -19,8 +19,11 @@ public class ViewByIDServlet extends HttpServlet {
         int id = Integer.parseInt(sid);
 
         Employee employee = EmployeeRepository.getEmployeeById(id);
-
-        out.print(employee);
+        if(employee.getId()==0) {
+            out.print("Wrong ID");
+        } else {
+            out.print(employee);
+        }
         out.close();
     }
 }

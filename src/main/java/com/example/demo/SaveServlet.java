@@ -24,23 +24,27 @@ public class SaveServlet extends HttpServlet {
         String country = request.getParameter("country");
         int cost = Integer.parseInt(request.getParameter("cost"));
 
-        Employee employee = new Employee();
-
-        employee.setName(name);
-        employee.setAmount(amount);
-        employee.setCountry(country);
-        employee.setCost(cost);
-
-        //out.println(employee.toString());
-        //out.println(EmployeeRepository.getConnection());
-
-        int status = EmployeeRepository.save(employee);
-        //out.println(status);
-
-        if (status > 0) {
-            out.print("Record saved successfully!");
+        if(amount <= 0 || cost <= 0) {
+            out.println("Incorrect data! Amount and cost must be > 0!");
         } else {
-            out.println("Sorry! unable to save record");
+            Employee employee = new Employee();
+
+            employee.setName(name);
+            employee.setAmount(amount);
+            employee.setCountry(country);
+            employee.setCost(cost);
+
+            //out.println(employee.toString());
+            //out.println(EmployeeRepository.getConnection());
+
+            int status = EmployeeRepository.save(employee);
+            //out.println(status);
+
+            if (status > 0) {
+                out.println("Record saved successfully!");
+            } else {
+                out.println("Sorry! unable to save record");
+            }
         }
         out.close();
     }

@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet("/deleteServlet")
 public class DeleteServlet extends HttpServlet {
@@ -14,7 +15,19 @@ public class DeleteServlet extends HttpServlet {
 
         String sid = request.getParameter("id");
         int id = Integer.parseInt(sid);
-        EmployeeRepository.delete(id);
-        response.sendRedirect("viewServlet");
+
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+
+        Employee employee = EmployeeRepository.getEmployeeById(id);
+        if(employee.getId()==0) {
+            out.print("Wrong ID! Can't delete!");
+
+        } else {
+            EmployeeRepository.delete(id);
+            out.print("ID: " + id + " deleted successfully");
+        }
+        out.close();
+        //response.sendRedirect("viewServlet");
     }
 }
