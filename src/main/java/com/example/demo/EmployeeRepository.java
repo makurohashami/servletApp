@@ -41,10 +41,11 @@ public class EmployeeRepository {
         int status = 0;
         try {
             Connection connection = EmployeeRepository.getConnection();
-            PreparedStatement ps = connection.prepareStatement("insert into users(name,email,country) values (?,?,?)");
+            PreparedStatement ps = connection.prepareStatement("insert into products(name,amount,country,cost) values (?,?,?,?)");
             ps.setString(1, employee.getName());
-            ps.setString(2, employee.getEmail());
+            ps.setInt(2, employee.getAmount());
             ps.setString(3, employee.getCountry());
+            ps.setInt(4, employee.getCost());
 
             status = ps.executeUpdate();
             connection.close();
@@ -61,11 +62,12 @@ public class EmployeeRepository {
 
         try {
             Connection connection = EmployeeRepository.getConnection();
-            PreparedStatement ps = connection.prepareStatement("update users set name=?,email=?,country=? where id=?");
+            PreparedStatement ps = connection.prepareStatement("update products set name=?,amount=?,country=?,cost=?  where id=?");
             ps.setString(1, employee.getName());
-            ps.setString(2, employee.getEmail());
+            ps.setInt(2, employee.getAmount());
             ps.setString(3, employee.getCountry());
-            ps.setInt(4, employee.getId());
+            ps.setInt(4, employee.getCost());
+            ps.setInt(5, employee.getId());
 
             status = ps.executeUpdate();
             connection.close();
@@ -82,7 +84,7 @@ public class EmployeeRepository {
 
         try {
             Connection connection = EmployeeRepository.getConnection();
-            PreparedStatement ps = connection.prepareStatement("delete from users where id=?");
+            PreparedStatement ps = connection.prepareStatement("delete from products where id=?");
             ps.setInt(1, id);
             status = ps.executeUpdate();
 
@@ -100,14 +102,15 @@ public class EmployeeRepository {
 
         try {
             Connection connection = EmployeeRepository.getConnection();
-            PreparedStatement ps = connection.prepareStatement("select * from users where id=?");
+            PreparedStatement ps = connection.prepareStatement("select * from products where id=?");
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 employee.setId(rs.getInt(1));
                 employee.setName(rs.getString(2));
-                employee.setEmail(rs.getString(3));
+                employee.setAmount(rs.getInt(3));
                 employee.setCountry(rs.getString(4));
+                employee.setCost(rs.getInt(5));
             }
             connection.close();
 
@@ -123,7 +126,7 @@ public class EmployeeRepository {
 
         try {
             Connection connection = EmployeeRepository.getConnection();
-            PreparedStatement ps = connection.prepareStatement("select * from users");
+            PreparedStatement ps = connection.prepareStatement("select * from products");
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -132,8 +135,9 @@ public class EmployeeRepository {
 
                 employee.setId(rs.getInt(1));
                 employee.setName(rs.getString(2));
-                employee.setEmail(rs.getString(3));
+                employee.setAmount(rs.getInt(3));
                 employee.setCountry(rs.getString(4));
+                employee.setCost(rs.getInt(5));
 
                 listEmployees.add(employee);
             }

@@ -4,8 +4,9 @@ public class Employee {
 
     private int id;
     private String name;
+    private int amount;
     private String country;
-    private String email;
+    private int cost;
 
     public int getId() {
         return id;
@@ -23,6 +24,14 @@ public class Employee {
         this.name = name;
     }
 
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
     public String getCountry() {
         return country;
     }
@@ -31,21 +40,22 @@ public class Employee {
         this.country = country;
     }
 
-    public String getEmail() {
-        return email;
+    public int getCost() {
+        return cost;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setCost(int cost) {
+        this.cost = cost;
     }
 
     @Override
     public String toString() {
-        return "Employee{" +
+        return "{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", amount=" + amount +
                 ", country='" + country + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+                ", cost=" + cost +
+                '}'+"\n";
     }
 }
