@@ -10,14 +10,14 @@ import java.util.Enumeration;
 /**
  * Servlet Filter implementation class RequestLoggingFilter
  */
-@WebFilter("/*")
+@WebFilter(filterName="Request and Response Logging Filter", description="logs requests and responses", urlPatterns="/*")
 public class RequestLoggingFilter implements Filter {
 
     private ServletContext context;
 
     public void init(FilterConfig fConfig) throws ServletException {
         this.context = fConfig.getServletContext();
-        this.context.log("RequestLoggingFilter initialized");
+        this.context.log("ReqAndResLoggingFilter initialized");
     }
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
