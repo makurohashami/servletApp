@@ -26,7 +26,7 @@ public class RequestLoggingFilter implements Filter {
         while (params.hasMoreElements()) {
             String name = params.nextElement();
             String value = request.getParameter(name);
-            this.context.log(req.getRemoteAddr() + "::Request Params::{" + name + "=" + value + "}");
+            this.context.log( "Parameter: [" + name + " = " + value + "]");
         }
 
         Cookie[] cookies = req.getCookies();

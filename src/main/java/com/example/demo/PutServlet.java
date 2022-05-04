@@ -26,9 +26,11 @@ public class PutServlet extends HttpServlet {
 
         Employee employee = EmployeeRepository.getEmployeeById(id);
         if(employee.getId()==0) {
+            System.out.println("Response: Wrong ID\n");
             out.print("Wrong ID");
         } else {
             if(amount <= 0 || cost <= 0) {
+                System.out.println("Response: Incorrect data! Amount and cost must be > 0!\n");
                 out.println("Incorrect data! Amount and cost must be > 0!");
             } else {
                 employee.setId(id);

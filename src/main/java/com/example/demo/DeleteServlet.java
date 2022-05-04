@@ -22,10 +22,12 @@ public class DeleteServlet extends HttpServlet {
         Employee employee = EmployeeRepository.getEmployeeById(id);
         if(employee.getId()==0) {
             out.print("Wrong ID! Can't delete!");
+            System.out.print("Response: Wrong ID! Can't delete!\n");
 
         } else {
             EmployeeRepository.delete(id);
             out.print("ID: " + id + " deleted successfully");
+            System.out.print("Response: ID: " + id + " deleted successfully\n");
         }
         out.close();
         //response.sendRedirect("viewServlet");

@@ -25,7 +25,7 @@ public class AuthenticationFilter implements Filter {
 
         String uri = req.getRequestURI();
 
-        this.context.log("Requested Resource::http://localhost:8080" + uri);
+        this.context.log("Request: " + req.getRemoteAddr() + ":" + req.getServerPort() +  req.getContextPath() + req.getServletPath());
 
         HttpSession session = req.getSession(false);
 

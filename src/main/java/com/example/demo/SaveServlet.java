@@ -41,8 +41,10 @@ public class SaveServlet extends HttpServlet {
             //out.println(status);
 
             if (status > 0) {
+                System.out.print("Response: Record saved successfully!\n");
                 out.println("Record saved successfully!");
             } else {
+                System.out.print("Response: Sorry! unable to save record\n");
                 out.println("Sorry! unable to save record");
             }
         }
